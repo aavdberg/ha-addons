@@ -2,10 +2,10 @@
 
 Current Release:
 
-## 25.1
+## 26.1
 ### Home Assistant Add-on
 
-* Bump EBUSd to 25.1
+* Bump EBUSd to 26.1
 
 ### [ebusd](https://github.com/john30/ebusd/blob/master/ChangeLog.md) (2025-04-14)
 
