@@ -2,15 +2,15 @@
 
 Current Release:
 
-## 26.1.1
+## 1.0.1
 ### Home Assistant Add-on
 
 * Add `receivetimeout` option to support VPN/high-latency eBUS connections
 
-## 26.1
+## 1.0.0
 ### Home Assistant Add-on
 
-* Bump EBUSd to 26.1
+* Initial release based on eBUSd 26.1
 
 ### [ebusd](https://github.com/john30/ebusd/blob/master/ChangeLog.md) (2025-04-14)
 
