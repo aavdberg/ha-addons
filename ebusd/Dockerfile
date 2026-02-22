@@ -1,34 +1,23 @@
 ARG BUILD_FROM
+FROM john30/ebusd:latest AS ebusd-source
+
 FROM $BUILD_FROM
 
 ENV LANG C.UTF-8
 
-# Install build dependencies
+# Install runtime dependencies for ebusd
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    build-essential \
-    cmake \
-    git \
-    libssl-dev \
-    libmosquitto-dev \
-    curl \
-    jq \
+    libmosquitto1 \
+    netcat-openbsd \
     && rm -rf /var/lib/apt/lists/*
 
-# Fetch latest ebusd release tag dynamically
-RUN LATEST_TAG=$(curl -s https://api.github.com/repos/john30/ebusd/releases/latest | jq -r .tag_name) && \
-    echo "Latest ebusd version: $LATEST_TAG" && \
-    git clone https://github.com/john30/ebusd.git /tmp/ebusd && \
-    cd /tmp/ebusd && \
-    git checkout "$LATEST_TAG" && \
-    cmake . && \
-    make && \
-    make install
+# Copy ebusd binaries and default config from official image
+COPY --from=ebusd-source /usr/bin/ebusd /usr/bin/ebusd
+COPY --from=ebusd-source /usr/bin/ebusctl /usr/bin/ebusctl
+COPY --from=ebusd-source /etc/ebusd /etc/ebusd
 
-# Cleanup build dependencies, keep runtime libraries (libssl3, libmosquitto1, curl, jq)
-RUN rm -rf /tmp/ebusd && \
-    apt-get purge -y --auto-remove git cmake build-essential libssl-dev libmosquitto-dev && \
-    apt-get install -y --no-install-recommends libssl3 libmosquitto1 && \
-    rm -rf /var/lib/apt/lists/*
+# Verify ebusd binary is present and functional
+RUN ebusd --version
 
 COPY run.sh /
 RUN chmod a+x /run.sh

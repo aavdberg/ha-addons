@@ -40,7 +40,7 @@ do
 done
 
 #String options
-declare options=( "configpath" "port" "latency" "accesslevel" "pollinterval" "mqttint" "mqttvar" "mqtttopic" "lograwdatafile" "lograwdatasize")
+declare options=( "configpath" "latency" "accesslevel" "pollinterval" "mqttint" "mqttvar" "mqtttopic" "lograwdatafile" "lograwdatasize")
 
 for optName in "${options[@]}"
 do
@@ -89,7 +89,7 @@ fi
 
 #Activate http
 if bashio::config.true http; then
-    ebusd_args+=" --httpport=8889"
+    ebusd_args+=("--httpport=8889")
 fi
 
 #Check for s6-log options
