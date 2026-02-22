@@ -74,3 +74,19 @@ This release now fully supports wireless/network [eBUS adapters](https://adapter
 For example ```network_device: enh:Y.Y.Y.Y:9999```
 Where ```Y.Y.Y.Y``` is the address of the eBUS asapter.
 
+## Connecting over VPN or high-latency networks
+
+If the eBUS adapter is reachable only via VPN or a high-latency network, the default eBUS timing values may be too short, causing repeated broadcast scan failures such as:
+
+```
+[bus error] send to fe: ERR: SYN received, retry
+[main error] initial scan failed: ERR: SYN received
+```
+
+To fix this, increase the following options to match the extra latency of your connection:
+
+- **Latency** (`--latency`): Add the one-way network latency in ms (e.g. `50` for a 50 ms VPN link).
+- **Receive timeout** (`--receivetimeout`): Set the time ebusd waits for a slave to respond. Default is 25 ms; increase to e.g. `200` for VPN connections.
+
+Both options can be configured directly in the add-on settings UI.
+

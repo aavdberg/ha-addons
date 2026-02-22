@@ -40,7 +40,7 @@ do
 done
 
 #String options
-declare options=( "configpath" "latency" "accesslevel" "pollinterval" "mqttint" "mqttvar" "mqtttopic" "lograwdatafile" "lograwdatasize")
+declare options=( "configpath" "latency" "receivetimeout" "accesslevel" "pollinterval" "mqttint" "mqttvar" "mqtttopic" "lograwdatafile" "lograwdatasize")
 
 for optName in "${options[@]}"
 do

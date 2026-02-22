@@ -4,7 +4,10 @@ configuration:
     description: Use this option for USB eBUSd adapters
   latency:
     name: "Latency in MSEC (default: 0 for USB, 10 for IP)"
-    description: ebusd --latency=MSEC Transfer latency in ms [0 for USB, 10 for IP]
+    description: ebusd --latency=MSEC Transfer latency in ms [0 for USB, 10 for IP]. Increase this value when connecting over VPN or other high-latency networks.
+  receivetimeout:
+    name: "Receive timeout in MSEC (default: 25)"
+    description: ebusd --receivetimeout=MSEC Expect a slave to answer within MSEC ms [25]. Increase this value when connecting over VPN or other high-latency networks (e.g. 100-500).
   readonly:
     name: "Read Only (default: off)"
     description: Only read from device, never write to it
