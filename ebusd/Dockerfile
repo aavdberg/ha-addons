@@ -16,9 +16,6 @@ COPY --from=ebusd-source /usr/bin/ebusd /usr/bin/ebusd
 COPY --from=ebusd-source /usr/bin/ebusctl /usr/bin/ebusctl
 COPY --from=ebusd-source /etc/ebusd /etc/ebusd
 
-# Verify ebusd binary is present and functional
-RUN ebusd --version
-
 COPY run.sh /
 RUN chmod a+x /run.sh
 
