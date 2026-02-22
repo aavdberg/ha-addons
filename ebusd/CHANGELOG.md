@@ -2,6 +2,11 @@
 
 Current Release:
 
+## 26.1.1
+### Home Assistant Add-on
+
+* Add `receivetimeout` option to support VPN/high-latency eBUS connections
+
 ## 26.1
 ### Home Assistant Add-on
 
