@@ -3,6 +3,8 @@ Addons for http://home-assistant.io
 
 Created by @LukasGrebe.  Improved and maintained by @tim-devel
 
+forked by @aavdberg and migrates to debian off alpine for faster updates
+
 ## How to Install
 1. In Supervisor go to the Add-on Store,
 2. In the overflow menu click "Repositories"
