@@ -4,13 +4,14 @@ FROM $BUILD_FROM
 ENV LANG C.UTF-8
 
 # Install build dependencies
-RUN apk add --no-cache \
-    build-base \
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
     cmake \
     git \
-    openssl-dev \
+    libssl-dev \
     curl \
-    jq
+    jq \
+    && rm -rf /var/lib/apt/lists/*
 
 # Fetch latest ebusd release tag dynamically
 RUN LATEST_TAG=$(curl -s https://api.github.com/repos/john30/ebusd/releases/latest | jq -r .tag_name) && \
@@ -22,9 +23,11 @@ RUN LATEST_TAG=$(curl -s https://api.github.com/repos/john30/ebusd/releases/late
     make && \
     make install
 
-# Cleanup
+# Cleanup build dependencies, keep runtime libraries (libssl3)
 RUN rm -rf /tmp/ebusd && \
-    apk del git cmake build-base jq curl
+    apt-get purge -y --auto-remove git cmake build-essential libssl-dev jq curl && \
+    apt-get install -y --no-install-recommends libssl3 && \
+    rm -rf /var/lib/apt/lists/*
 
 COPY run.sh /
 RUN chmod a+x /run.sh
