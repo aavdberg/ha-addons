@@ -27,7 +27,7 @@ RUN LATEST_TAG=$(curl -s https://api.github.com/repos/john30/ebusd/releases/late
 # Cleanup build dependencies, keep runtime libraries (libssl3, libmosquitto1, curl, jq)
 RUN rm -rf /tmp/ebusd && \
     apt-get purge -y --auto-remove git cmake build-essential libssl-dev libmosquitto-dev && \
-    apt-get install -y --no-install-recommends libssl3 libmosquitto1 && \
+    apt-get install -y --no-install-recommends libssl3 libmosquitto1 netcat-openbsd && \
     rm -rf /var/lib/apt/lists/*
 
 COPY run.sh /
