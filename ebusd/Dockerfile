@@ -23,9 +23,9 @@ RUN LATEST_TAG=$(curl -s https://api.github.com/repos/john30/ebusd/releases/late
     make && \
     make install
 
-# Cleanup build dependencies, keep runtime libraries (libssl3)
+# Cleanup build dependencies, keep runtime libraries (libssl3, curl, jq)
 RUN rm -rf /tmp/ebusd && \
-    apt-get purge -y --auto-remove git cmake build-essential libssl-dev jq curl && \
+    apt-get purge -y --auto-remove git cmake build-essential libssl-dev && \
     apt-get install -y --no-install-recommends libssl3 && \
     rm -rf /var/lib/apt/lists/*
 
